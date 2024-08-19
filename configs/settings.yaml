@@ -14,17 +14,11 @@ input_table_list:
     recode_columns:
       home_zone_id: land_use.zone_id
     keep_columns:
-      #- household_id
       - home_zone_id
       - hhsize
       - num_workers
       - hincp
-      #- hhincAdj
-      #- adjinc
-      #- veh
       - hht
-      #- bld
-      #- type
   - tablename: persons
     filename: persons.csv
     # The index column is set before keep_columns,
@@ -34,25 +28,16 @@ input_table_list:
       maz: home_zone_id
       sporder: PNUM
     keep_columns:
-      #- person_id
       - household_id
       - home_zone_id
       - PNUM
       - agep
-      #- employed
       - pecasOcc
       - sex
       - esr
       - wkw
       - wkhp
-      #-mil
       - schg
-      #-schl
-      #-indp02
-      #-indp07
-      #-occp02
-      #-occp10
-      #-n
   - tablename: land_use
     filename: land_use.csv
     # The index column is set before keep_columns,
@@ -61,29 +46,18 @@ input_table_list:
     recode_columns:
       zone_id: zero-based
     keep_columns:
-      #- TAZ
-#      - construc
-#      - manufac
-#      - TCU
-#      - wholesl
       - retail
-#      - FIRE
       - service
-#      - private
-#      - govt
       - emp
       - pop
       - hshld
       - univ
       - acres
-#      - otherEmp
-#      - district
       - PARKTOT
       - PARKLNG
       - PROPFREE
       - PARKRATE
       - areatype
-#      - county
       - CBDFlag
       - N11
       - N21
@@ -169,13 +143,13 @@ models:
 
 multiprocess: True
 fail_fast: True
+num_processes: 28
 
 multiprocess_steps:
   - name: mp_initialize_landuse
     begin: initialize_landuse
   - name: mp_accessibility
     begin: compute_accessibility
-    num_processes: 28
     slice:
       tables:
         - accessibility
@@ -183,8 +157,6 @@ multiprocess_steps:
     begin: initialize_households
   - name: mp_households
     begin: school_location
-    num_processes: 28
-    # chunk_size: 300000000
     slice:
       tables:
         - households
@@ -231,3 +203,7 @@ min_value_of_time: 1
 max_value_of_time: 50
 distributed_vot_mu: 0.684
 distributed_vot_sigma: 0.85
+
+# when running sharrow
+sharrow: require
+recode_pipeline_columns: True

@@ -139,7 +139,7 @@ models:
   - write_trip_matrices
   - write_tables
   
-resume_after: trip_departure_choice
+# resume_after: trip_departure_choice
 
 multiprocess: False
 fail_fast: True
@@ -191,6 +191,7 @@ output_tables:
       decode_columns:
         origin: land_use.zone_id
         destination: land_use.zone_id
+        parking_zone_id: nonnegative | land_use.zone_id
     - joint_tour_participants
     
 # trace_od: [100,10]
