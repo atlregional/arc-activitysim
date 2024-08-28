@@ -32,3 +32,4 @@ SIMULATE_CHOOSER_COLUMNS:
   - num_add_shop_maint_tours
   - num_add_soc_discr_tours
   
+explicit_chunk: 0.2

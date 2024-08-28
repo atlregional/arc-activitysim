@@ -1,3 +1,5 @@
+households_sample_size: 0
+
 # input tables
 input_table_list:
   - tablename: households
@@ -9,18 +11,14 @@ input_table_list:
       maz: home_zone_id
       np: hhsize
       nwrkrs_esr: num_workers
+    recode_columns:
+      home_zone_id: land_use.zone_id
     keep_columns:
-      #- household_id
       - home_zone_id
       - hhsize
       - num_workers
       - hincp
-      #- hhincAdj
-      #- adjinc
-      #- veh
       - hht
-      #- bld
-      #- type
   - tablename: persons
     filename: persons.csv
     # The index column is set before keep_columns,
@@ -30,56 +28,36 @@ input_table_list:
       maz: home_zone_id
       sporder: PNUM
     keep_columns:
-      #- person_id
       - household_id
       - home_zone_id
       - PNUM
       - agep
-      #- employed
       - pecasOcc
       - sex
       - esr
       - wkw
       - wkhp
-      #-mil
       - schg
-      #-schl
-      #-indp02
-      #-indp07
-      #-occp02
-      #-occp10
-      #-n
   - tablename: land_use
     filename: land_use.csv
     # The index column is set before keep_columns,
     # so don't put index in keep columns
     index_col: zone_id
-#    rename_columns:
-#
+    recode_columns:
+      zone_id: zero-based
     keep_columns:
-      #- TAZ
-#      - construc
-#      - manufac
-#      - TCU
-#      - wholesl
       - retail
-#      - FIRE
       - service
-#      - private
-#      - govt
       - emp
       - pop
       - hshld
       - univ
       - acres
-#      - otherEmp
-#      - district
       - PARKTOT
       - PARKLNG
       - PROPFREE
       - PARKRATE
       - areatype
-#      - county
       - CBDFlag
       - N11
       - N21
@@ -121,6 +99,8 @@ skims_file: skims.omx
 use_shadow_pricing: True
 
 # chunk_size:
+chunk_method: hybrid_uss
+chunk_training_mode: explicit
 
 models:
   - initialize_landuse
@@ -163,24 +143,21 @@ models:
 
 multiprocess: True
 fail_fast: True
+num_processes: 28
 
 multiprocess_steps:
   - name: mp_initialize_landuse
     begin: initialize_landuse
   - name: mp_accessibility
     begin: compute_accessibility
-    num_processes: 28
     slice:
       tables:
         - accessibility
-      except:
-        - land_use
+      exclude: True
   - name: mp_initialize_households
     begin: initialize_households
   - name: mp_households
     begin: school_location
-    num_processes: 28
-    chunk_size: 300000000
     slice:
       tables:
         - households
@@ -196,11 +173,26 @@ output_tables:
   tables:
     - checkpoints
     - accessibility
-    - land_use
-    - households
-    - persons
-    - tours
-    - trips
+    - tablename: land_use
+      decode_columns:
+        zone_id: land_use.zone_id
+    - tablename: households
+      decode_columns:
+        home_zone_id: land_use.zone_id
+    - tablename: persons
+      decode_columns:
+        home_zone_id: land_use.zone_id
+        school_zone_id: nonnegative | land_use.zone_id
+        workplace_zone_id: nonnegative | land_use.zone_id
+    - tablename: tours
+      decode_columns:
+        origin: land_use.zone_id
+        destination: land_use.zone_id
+    - tablename: trips
+      decode_columns:
+        origin: land_use.zone_id
+        destination: land_use.zone_id
+        parking_zone_id: nonnegative | land_use.zone_id
     - joint_tour_participants
     
 # trace_od: [100,10]
@@ -212,3 +204,8 @@ min_value_of_time: 1
 max_value_of_time: 50
 distributed_vot_mu: 0.684
 distributed_vot_sigma: 0.85
+
+# sharrow settings
+# sharrow: require
+# recode_pipeline_columns: True
+# sharrow_cache_dir: # specify only when not using default

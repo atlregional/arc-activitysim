@@ -29,3 +29,5 @@ presence of retiree other than self in household,has_retiree,"other_than(persons
 presence of driving_kid other than self in household,has_driving_kid,"other_than(persons.household_id, persons.ptype == 6)"
 presence of school_kid other than self in household,has_school_kid,"other_than(persons.household_id, persons.ptype == 7)"
 presence of preschooler other than self in household,has_preschool_kid,"other_than(persons.household_id, persons.ptype == 8)"
+presence of at home school_kid other than self in household,has_school_kid_at_home,"other_than(persons.household_id, (persons.ptype == 7)&(~persons.travel_active))"
+presence of at home preschooler other than self in household,has_preschool_kid_at_home,"other_than(persons.household_id, (persons.ptype == 8)&(~persons.travel_active))"

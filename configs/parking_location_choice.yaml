@@ -1,12 +1,12 @@
-METADATA:
-  CHOOSER: trips_merged
-  INPUT:
-    persons:
-    trips:
-    tours:
-  OUTPUT:
-    trips:
-      - parking_zone_id
+# METADATA:
+#   CHOOSER: trips_merged
+#   INPUT:
+#     persons:
+#     trips:
+#     tours:
+#   OUTPUT:
+#     trips:
+#       - parking_zone_id
 
 SPECIFICATION: parking_location_choice.csv
 COEFFICIENTS: parking_location_choice_coeffs.csv
@@ -34,3 +34,13 @@ SEGMENTS:
 ALT_DEST_COL_NAME: parking_zone_id
 TRIP_ORIGIN: origin
 TRIP_DESTINATION: destination
+
+AUTO_MODES:
+  - DRIVEALONEFREE
+  - DRIVEALONEPAY
+  - SHARED2FREE
+  - SHARED2PAY
+  - SHARED3FREE
+  - SHARED3PAY
+
+explicit_chunk: 0.2

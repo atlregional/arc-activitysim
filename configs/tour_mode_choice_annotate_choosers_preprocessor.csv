@@ -88,6 +88,8 @@ Depart before 6 AM (todOut==1),dep_wk_before_6_am,(df.out_period.isin(['EA']))
 Depart after 4 PM (todOut>4 was used in work expressions),dep_wk_after_4_pm,(df.out_period.isin(['EV']))
 Depart after 4 PM (for non-mandatory and at-work expressions),dep_after_4_pm,"(df.start > 26) if 'start' in df.columns else (df.out_period.isin(['PM','EV']))"
 "Arrive after 7PM (in java code, it was defined based on depart period)",arr_after_7_pm,(df.end > 32) if 'end' in df.columns else (df.in_period.isin(['EV']))
+Depart from home before 8 am,dep_before_8_am,"(df.start <= 10) if 'start' in df.columns else (df.out_period.isin(['EA']))"
+Return home before 5 pm,ret_before_5_pm,"(df.end <= 28) if 'end' in df.columns else ~(df.in_period.isin(['EV']))"
 #,,
 destination in central business district,destination_in_cbd,"(reindex(land_use.CBDFlag, df[dest_col_name]))>0"
 Inc_PCTLT10K,Inc_PCTLT10K,"(np.minimum(np.maximum(df.I_PCTLT10K,5),30)-5)/25"
