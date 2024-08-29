@@ -1,2 +1,2 @@
-# client_arc_abm
-ARC ABM update, including ActivitySim updates
+# arc-activitysim
+The standalone activitysim implementation for ARC travel demand model.
