@@ -83,8 +83,8 @@ jobs:
         with:
           name: legacy-outputs
           path: |
-            ~/arc-activitysim/output-fulton-legacy/final_*.csv
-            ~/arc-activitysim/output-fulton-legacy/*.log
-            ~/arc-activitysim/output-fulton-legacy/timing_log.csv
+            ${{ github.workspace }}/arc-activitysim/output-fulton-legacy/final_*.csv
+            ${{ github.workspace }}/arc-activitysim/output-fulton-legacy/*.log
+            ${{ github.workspace }}/arc-activitysim/output-fulton-legacy/timing_log.csv
             
         
