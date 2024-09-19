@@ -54,8 +54,7 @@ jobs:
 
       - name: Update environment
         run: |
-          mamba env update -n asim-test -f activitysim/conda-environments/github-actions-tests.yml
-        if: steps.cache.outputs.cache-hit != 'true'
+          conda env update -n asim-test -f activitysim/conda-environments/github-actions-tests.yml
 
       - name: Install activitysim
         # installing without dependencies is faster, we trust that all needed dependencies
@@ -66,8 +65,8 @@ jobs:
 
       - name: Conda checkup
         run: |
-          mamba info -a
-          mamba list
+          conda info -a
+          conda list
 
       - name: Get the Fulton data
         run: |
