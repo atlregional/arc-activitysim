@@ -20,7 +20,7 @@ from activitysim.core import workflow
 
 
 def local_path(dirname) -> str:
-    return str(os.path.join(os.path.dirname(__file__), dirname))
+    return str(Path(__file__).parents[1].joinpath(dirname))
 
 
 def main(use_sharrow=False, n_households=1_000):
