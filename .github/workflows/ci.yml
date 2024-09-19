@@ -78,3 +78,14 @@ jobs:
         run: |
           cd arc-activitysim
           python scripts/run-fulton.py
+          
+      - name: Upload legacy artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: legacy-outputs
+          path: |
+            ~/arc-activitysim/output-fulton-legacy/final_*.csv
+            ~/arc-activitysim/output-fulton-legacy/*.log
+            ~/arc-activitysim/output-fulton-legacy/timing_log.csv
+            
+        
