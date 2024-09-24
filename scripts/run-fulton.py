@@ -39,9 +39,11 @@ def main():
             local_path("configs"),
         )
         out_dir = local_path("output-fulton-sharrow")
+        settings_file_name = "settings_sh.yaml"
     else:
         configs_dir = local_path("configs")
         out_dir = local_path("output-fulton-legacy")
+        settings_file_name = "settings.yaml"
 
     # ensure the output directory exists, and do not commit any output to git
     Path(out_dir).mkdir(exist_ok=True)
@@ -72,6 +74,7 @@ def main():
         output_dir=out_dir,
         settings=settings,
         cache_dir=Path(out_dir).joinpath("cache"),
+        settings_file_name=settings_file_name,
     )
     state.import_extensions([])
     state.logging.config_logger()
