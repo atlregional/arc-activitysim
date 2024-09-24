@@ -87,6 +87,11 @@ jobs:
             ${{ github.workspace }}/arc-activitysim/output-fulton-legacy/*.log
             ${{ github.workspace }}/arc-activitysim/output-fulton-legacy/timing_log.csv
 
+      - name: Check legacy outputs
+        run: |
+          cd arc-activitysim
+          python scripts/check-fulton.py --check-dir ${{ github.workspace }}/arc-activitysim/output-fulton-legacy
+
       - name: Run with Sharrow
         run: |
           cd arc-activitysim
@@ -101,5 +106,8 @@ jobs:
             ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow/*.log
             ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow/timing_log.csv
             
+      - name: Check sharrow outputs
+        run: |
+          cd arc-activitysim
+          python scripts/check-fulton.py --check-dir ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow
 
-        
