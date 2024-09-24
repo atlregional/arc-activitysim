@@ -31,7 +31,7 @@ def compare_table_raw(filename="final_households.csv", check_dir="."):
     with zipfile.ZipFile(reference_outputs) as z:
         with z.open(filename) as f:
             ref_tab = pd.read_csv(f)
-    with z.open(os.path.join(check_dir, filename)) as f:
+    with open(os.path.join(check_dir, filename)) as f:
         check_tab = pd.read_csv(f)
     try:
         pd.testing.assert_frame_equal(ref_tab, check_tab)
