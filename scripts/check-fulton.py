@@ -2,12 +2,17 @@ import pandas as pd
 import zipfile
 import argparse
 import os
+import pathlib
+
+reference_outputs = pathlib.Path(__file__).parent.joinpath(
+    "fulton-reference-outputs.zip"
+)
 
 
 def compare_table_artifact(
     filename="final_households.csv", artifact_name="legacy-outputs.zip"
 ):
-    with zipfile.ZipFile("fulton-reference-outputs.zip") as z:
+    with zipfile.ZipFile(reference_outputs) as z:
         with z.open(filename) as f:
             ref_tab = pd.read_csv(f)
     with zipfile.ZipFile(artifact_name) as z:
@@ -23,7 +28,7 @@ def compare_table_artifact(
 
 
 def compare_table_raw(filename="final_households.csv", check_dir="."):
-    with zipfile.ZipFile("fulton-reference-outputs.zip") as z:
+    with zipfile.ZipFile(reference_outputs) as z:
         with z.open(filename) as f:
             ref_tab = pd.read_csv(f)
     with z.open(os.path.join(check_dir, filename)) as f:
