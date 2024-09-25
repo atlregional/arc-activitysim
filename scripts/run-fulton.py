@@ -59,7 +59,7 @@ def main():
     # and run the model with only 2 processes.
     settings = {
         "households_sample_size": args.households_sample_size,
-        "num_processes": 2,
+        "multiprocess": False,
         # user can modify other settings here if desired
     }
 
