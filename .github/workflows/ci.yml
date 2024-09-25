@@ -92,12 +92,31 @@ jobs:
           cd arc-activitysim
           python scripts/check-fulton.py --check-dir ${{ github.workspace }}/arc-activitysim/output-fulton-legacy
 
+      - name: Run with sharrow-compile
+        run: |
+          cd arc-activitysim
+          python scripts/run-fulton.py --sharrow-compile
+
+      - name: Upload sharrow-compile artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sharrow-compile-outputs
+          path: |
+            ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow-compile/final_*.csv
+            ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow-compile/*.log
+            ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow-compile/timing_log.csv
+            
+      - name: Check sharrow-compile outputs
+        run: |
+          cd arc-activitysim
+          python scripts/check-fulton.py --check-dir ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow-compile
+
       - name: Run with Sharrow
         run: |
           cd arc-activitysim
-          python scripts/run-fulton.py --sharrow
+          python scripts/run-fulton.py --sharrow-compile
 
-      - name: Upload sharrow artifacts
+      - name: Upload Sharrow artifacts
         uses: actions/upload-artifact@v4
         with:
           name: sharrow-outputs
@@ -105,7 +124,7 @@ jobs:
             ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow/final_*.csv
             ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow/*.log
             ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow/timing_log.csv
-            
+
       - name: Check sharrow outputs
         run: |
           cd arc-activitysim

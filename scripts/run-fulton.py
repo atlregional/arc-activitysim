@@ -27,23 +27,29 @@ def local_path(dirname) -> str:
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--sharrow-compile", help="compile sharrow", action="store_true")
     parser.add_argument("--sharrow", help="use sharrow", action="store_true")
     parser.add_argument("--households-sample-size", type=int, default=1000)
     args = parser.parse_args()
 
     # These things change based on whether we are using sharrow or not.
-    if args.sharrow:
-        print("sharrow activated")
+    if args.sharrow_compile:
+        print("sharrow compile activated")
         configs_dir = (
             local_path("configs_sh_compile"),
             local_path("configs"),
         )
+        out_dir = local_path("output-fulton-sharrow-compile")
+    elif args.sharrow_compile:
+        print("sharrow run activated")
+        configs_dir = (
+            local_path("configs_sh"),
+            local_path("configs"),
+        )
         out_dir = local_path("output-fulton-sharrow")
-        settings_file_name = "settings_sh.yaml"
     else:
         configs_dir = local_path("configs")
         out_dir = local_path("output-fulton-legacy")
-        settings_file_name = "settings.yaml"
 
     # ensure the output directory exists, and do not commit any output to git
     Path(out_dir).mkdir(exist_ok=True)
@@ -59,6 +65,9 @@ def main():
     # and run the model with only 2 processes.
     settings = {
         "households_sample_size": args.households_sample_size,
+        # multiprocess is set to False as the trip scheduling choice model's
+        # reproducible random number generator is not MP-safe
+        # see https://github.com/ActivitySim/activitysim/issues/891
         "multiprocess": False,
         # user can modify other settings here if desired
     }
@@ -74,7 +83,6 @@ def main():
         output_dir=out_dir,
         settings=settings,
         cache_dir=Path(out_dir).joinpath("cache"),
-        settings_file_name=settings_file_name,
     )
     state.import_extensions([])
     state.logging.config_logger()
