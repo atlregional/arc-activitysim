@@ -75,7 +75,8 @@ jobs:
 
       - name: Run progressive tests
         run: |
-          python -m pytest arc-activitysim/tests/test_fulton.py
+          cd arc-activitysim
+          python -m pytest tests/test_activitysim.py
 
       - name: Run without Sharrow
         run: |
