@@ -73,6 +73,10 @@ jobs:
           cd arc-activitysim
           python scripts/fetch-fulton.py
 
+      - name: Run progressive tests
+        run: |
+          python -m pytest arc-activitysim/tests/test_fulton.py
+
       - name: Run without Sharrow
         run: |
           cd arc-activitysim
@@ -92,29 +96,10 @@ jobs:
           cd arc-activitysim
           python scripts/check-fulton.py --check-dir ${{ github.workspace }}/arc-activitysim/output-fulton-legacy
 
-      - name: Run with sharrow-compile
-        run: |
-          cd arc-activitysim
-          python scripts/run-fulton.py --sharrow-compile
-
-      - name: Upload sharrow-compile artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: sharrow-compile-outputs
-          path: |
-            ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow-compile/final_*.csv
-            ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow-compile/*.log
-            ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow-compile/timing_log.csv
-            
-      - name: Check sharrow-compile outputs
-        run: |
-          cd arc-activitysim
-          python scripts/check-fulton.py --check-dir ${{ github.workspace }}/arc-activitysim/output-fulton-sharrow-compile
-
       - name: Run with Sharrow
         run: |
           cd arc-activitysim
-          python scripts/run-fulton.py --sharrow-compile
+          python scripts/run-fulton.py --sharrow
 
       - name: Upload Sharrow artifacts
         uses: actions/upload-artifact@v4
