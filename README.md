@@ -76,8 +76,14 @@ model of the ARC region, but this scale of data can be overwhelming
 for testing the operation of the model, especially on more limited
 platforms.
 
-To facilitate testing, data for a smaller slice of the region (just 
-Fulton County) can be downloaded with this Python script (also available
+To facilitate testing, data for a smaller slice of the region is available.
+This test data includes just Fulton County, which has 1,296 zones; this is
+a small enough area to run the model on a laptop or within the CI testing
+infrastructure, as it will require only about 6GB of RAM to to store the
+skims in memory, and another 1 or 2 GB for the rest of the model. But this 
+area is still large enough to provide a meaningful test of the model, with 
+enough zones to exercise the model's capabilities and complexity. The Fulton 
+County data can be downloaded with this Python script (also available
 as [fetch-fulton.py](./scripts/fetch-fulton.py)):
 
 ```python
