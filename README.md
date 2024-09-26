@@ -111,8 +111,8 @@ for Fulton County, and the results are uploaded to the `Actions` tab
 of the repository.  The tests are configured in the `.github/workflows`
 directory, and use the scripts in the `scripts` directory.
 
-Note that the tests with sharrow enabled are run in a clean environment
-every time, so the sharrow test includes the overhead of compiling all
-the numba code.  This will make it appear that the sharrow test is *much*
-slower than the legacy test; this is normal an not an indication that 
-sharrow is slower than the legacy code for production runs.
+Note that the tests are run in a clean environment every time, so the 
+first sharrow test includes the overhead of compiling all the numba code.  
+This will make it appear that this sharrow test is *much* slower than the 
+comparable legacy test; this is normal an not an indication that sharrow is 
+slower than the legacy code for production runs.
