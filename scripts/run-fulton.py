@@ -40,7 +40,7 @@ def main():
             local_path("configs"),
         )
         out_dir = local_path("output-fulton-sharrow-compile")
-    elif args.sharrow_compile:
+    elif args.sharrow:
         print("sharrow run activated")
         configs_dir = (
             local_path("configs_sh"),
@@ -48,6 +48,7 @@ def main():
         )
         out_dir = local_path("output-fulton-sharrow")
     else:
+        print("legacy run activated")
         configs_dir = local_path("configs")
         out_dir = local_path("output-fulton-legacy")
 
