@@ -172,7 +172,9 @@ output_tables:
   prefix: final_
   tables:
     - checkpoints
-    - accessibility
+    - tablename: accessibility
+      decode_columns:
+        zone_id: land_use.zone_id
     - tablename: land_use
       decode_columns:
         zone_id: land_use.zone_id
