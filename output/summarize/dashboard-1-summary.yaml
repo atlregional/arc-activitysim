@@ -1,0 +1,227 @@
+version: 1
+
+header:
+  tab: Topsheet
+  title: ActivitySim Topsheet
+  description: "Some example metrics that people find generally useful."
+
+layout:
+  topsheetRow:
+    - title: "At-a-Glance"
+      type: "topsheet"
+      props:
+        configFile: "topsheet.yaml"
+
+  row0:
+    - title: "Work Location"
+      type: "line"
+      props:
+        dataset: "work_location.csv"
+        x: "index"
+        xAxisName: "Distance (mile)"
+        yAxisName: "Number of Trips"
+        columns: ["trips"]
+
+  row1:
+    - title: "School Location"
+      type: "line"
+      props:
+        dataset: "school_location.csv"
+        x: "index"
+        xAxisName: "Distance (mile)"
+        yAxisName: "Number of Trips"
+        columns: ["trips"]
+
+  row2:
+    - title: "CDAP Distribution"
+      type: "pie"
+      width: 1
+      props:
+        dataset: "cdap_distribution.csv"
+        useLastRow: true
+
+    - title: "CDAP by Person Type"
+      type: "bar"
+      width: 2
+      props:
+        dataset: "cdap_by_person_type.csv"
+        x: "person_type"
+        columns: ['Mandatory','Non-mandatory','Stay at Home']
+        stacked: true
+        yAxisTitle: "Activities"    
+
+  row3:
+    - title: "Auto Ownership"
+      type: "bar"
+      props:
+        dataset: "auto_ownership.csv"
+        x: "auto_ownership_category"
+        columns: ['households']
+        xAxisTitle: "Number of vehicles"
+        yAxisTitle: "Number of Households" 
+
+  row4:
+    - title: "Auto Ownership by Household Income"
+      type: "bar"
+      props:
+        dataset: "auto_ownership_by_hh_income.csv"
+        x: "hh_income_category"
+        columns: ['0 car','1 car','2 cars','3+ cars']
+        stacked: true
+        yAxisTitle: "Number of Households" 
+
+
+    - title: "Auto Ownership by Household Size"
+      type: "bar"
+      props:
+        dataset: "auto_ownership_by_hh_size.csv"
+        x: "household_size"
+        columns: ['0 car','1 car','2 cars','3+ cars']
+        stacked: true
+        yAxisTitle: "Number of Households" 
+
+  row5:
+    - title: "Auto Ownership by Number of Drivers"
+      type: "bar"
+      props:
+        dataset: "auto_ownership_by_number_of_drivers.csv"
+        x: "number_drivers"
+        columns: ['0 car','1 car','2 cars','3+ cars']
+        stacked: true
+        yAxisTitle: "Number of Households" 
+
+    - title: "Auto Ownership by Number of Workers"
+      type: "bar"
+      props:
+        dataset: "auto_ownership_by_number_of_workers.csv"
+        x: "number_workers"
+        columns: ['0 car','1 car','2 cars','3+ cars']
+        stacked: true
+        yAxisTitle: "Number of Households" 
+
+  row6:
+    - title: "Work Tour Length Distribution"
+      type: "line"
+      props:
+        dataset: "work_tour_length.csv"
+        x: "index"
+        xAxisName: "Distance (mile)"
+        yAxisName: "Number of Tours"
+        columns: ["tours"]
+
+    - title: "School Tour Length Distribution"
+      type: "line"
+      props:
+        dataset: "school_tour_length.csv"
+        x: "index"
+        xAxisName: "Distance (mile)"
+        yAxisName: "Number of Tours"
+        columns: ["tours"]
+
+    - title: "Non-Mandatory Tour Length Distribution"
+      type: "line"
+      props:
+        dataset: "non_mandatory_tour_length.csv"
+        x: "index"
+        xAxisName: "Distance (mile)"
+        yAxisName: "Number of Tours"
+        columns: ["tours"]
+
+  row7:
+    - title: "Work Tours by Start Time"
+      type: "line"
+      props:
+        dataset: "work_tours_start_time.csv"
+        x: "start"
+        columns: ['tours']
+        xAxisTitle: "Time of Day"
+        yAxisTitle: "Tours"
+
+    - title: "School Tours by Start Time"
+      type: "line"
+      props:
+        dataset: "school_tours_start_time.csv"
+        x: "start"
+        columns: ['tours']
+        xAxisTitle: "Time of Day"
+        yAxisTitle: "Tours"
+
+    - title: "Non-Mandatory Tours by Start Time"
+      type: "line"
+      props:
+        dataset: "non_mandatory_tours_start_time.csv"
+        x: "start"
+        columns: ['tours']
+        xAxisTitle: "Time of Day"
+        yAxisTitle: "Tours"
+
+
+  row8:
+    - title: "Work Tours by End Time"
+      type: "line"
+      props:
+        dataset: "work_tours_end_time.csv"
+        x: "end"
+        columns: ['tours']
+        xAxisTitle: "Time of Day"
+        yAxisTitle: "Tours"
+
+    - title: "School Tours by End Time"
+      type: "line"
+      props:
+        dataset: "school_tours_end_time.csv"
+        x: "end"
+        columns: ['tours']
+        xAxisTitle: "Time of Day"
+        yAxisTitle: "Tours"
+
+    - title: "Non-Mandatory Tours by End Time"
+      type: "line"
+      props:
+        dataset: "non_mandatory_tours_end_time.csv"
+        x: "end"
+        columns: ['tours']
+        xAxisTitle: "Time of Day"
+        yAxisTitle: "Tours"
+
+  row9:
+    - title: "Joint Tour by Compostion"
+      type: "pie"
+      props:
+        dataset: "joint_tours_by_composition.csv"
+        useLastRow: true
+
+  row10:
+    - title: "Trip Mode Share"
+      info: "You can additional descriptive text for each chart element."
+      type: "pie"
+      width: 1
+      props:
+        dataset: "trips_by_mode_count.csv"
+        useLastRow: true
+
+    - title: "Trip Purpose"
+      info: "You can add additional descriptive text for each chart element."
+      type: "pie"
+      width: 1
+      props:
+        dataset: "trips_by_purpose_count.csv"
+        useLastRow: true
+
+  row11:
+    - title: "Trip Purpose by Time of Day"
+      description: "Trip counts stacked by puropse"
+      info: "You can add additional descriptive text for each chart element."
+      type: "area"
+      width: 1
+      props:
+        dataset: "trip_purpose_by_time_of_day.csv"
+        x: "depart"
+
+  row12:
+    - title: "Relationships Between Tour Modes and Trip Modes"
+      description: "Tour modes <---> Trip modes"
+      type: sankey
+      height: 8
+      props:
+        csv: tour_mode_to_trip_mode.csv

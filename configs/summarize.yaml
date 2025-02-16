@@ -1,0 +1,167 @@
+SPECIFICATION: summarize.csv
+OUTPUT: summarize
+
+# Set to True to export pipeline tables for expression development
+EXPORT_PIPELINE_TABLES: False
+
+preprocessor:
+  DF: trips_merged
+  SPEC: summarize_preprocessor.csv
+#  TABLES:
+
+persons_merged:
+  
+  AGGREGATE:
+    - column: ptype
+      label: person_type
+      map:
+        1: Full Time Worker
+        2: Part Time Worker
+        3: University Student
+        4: Non-working Adult
+        5: Retiree
+        6: Driving Age School Children
+        7: Pre-driving Age School Children
+        8: Pre-school Children
+
+    - column: cdap_activity
+      label: cdap_activity_category
+      map:
+        M: Mandatory
+        N: Non-mandatory
+        H: Stay at Home
+
+
+households:
+
+  BIN:
+    - column: auto_ownership
+      label: auto_ownership_category
+      type: manual_breaks
+      bin_breaks:
+        - -99
+        - 0
+        - 1
+        - 2
+        - 99
+      bin_labels:
+        - 0 car
+        - 1 car
+        - 2 cars
+        - 3+ cars
+
+    - column: hincp
+      label: hh_income_category
+      type: manual_breaks
+      bin_breaks:
+        - -9999999999
+        - 0
+        - 15000
+        - 50000
+        - 75000
+        - 9999999999
+      bin_labels:
+        - negative
+        - 0K-15K
+        - 15K-50K
+        - 50K-75K
+        - 75K+
+
+    - column: hhsize
+      label: household_size
+      type: manual_breaks
+      bin_breaks:
+        - -99
+        - 1
+        - 2
+        - 3
+        - 99
+      bin_labels:
+        - 1 person
+        - 2 persons
+        - 3 persons
+        - 4+ persons
+
+    - column: num_drivers
+      label: number_drivers
+      type: manual_breaks
+      bin_breaks:
+        - -99
+        - 0
+        - 1
+        - 2
+        - 99
+      bin_labels:
+        - 0 driver
+        - 1 driver
+        - 2 drivers
+        - 3+ drivers
+
+    - column: num_workers
+      label: number_workers
+      type: manual_breaks
+      bin_breaks:
+        - -99
+        - 0
+        - 1
+        - 2
+        - 99
+      bin_labels:
+        - 0 worker
+        - 1 worker
+        - 2 workers
+        - 3+ workers
+
+# trips_merged:
+  
+#   AGGREGATE:
+#     - column: trip_mode
+#       label: major_trip_mode
+#       map:
+#         DRIVEALONEFREE: SOV
+#         DRIVEALONEPAY: SOV
+#         SHARED2FREE: HOV
+#         SHARED2PAY: HOV
+#         SHARED3FREE: HOV
+#         SHARED3PAY: HOV
+#         WALK_LOC: Transit
+#         WALK_LRF: Transit
+#         WALK_EXP: Transit
+#         WALK_HVY: Transit
+#         WALK_COM: Transit
+#         DRIVE_LOC: Transit
+#         DRIVE_LRF: Transit
+#         DRIVE_EXP: Transit
+#         DRIVE_HVY: Transit
+#         DRIVE_COM: Transit
+#         DRIVEACCESS: Transit
+#         WALK: Non-Motorized
+#         BIKE: Non-Motorized
+#         TAXI: Ride Hail
+#         TNC_SINGLE: Ride Hail
+#         TNC_SHARED: Ride Hail
+
+#     - column: trip_mode
+#       label: major_access_trip_mode
+#       map:
+#         DRIVEALONEFREE: SOV
+#         DRIVEALONEPAY: SOV
+#         SHARED2FREE: HOV
+#         SHARED2PAY: HOV
+#         SHARED3FREE: HOV
+#         SHARED3PAY: HOV
+#         WALK_LOC: Walk to Transit
+#         WALK_LRF: Walk to Transit
+#         WALK_EXP: Walk to Transit
+#         WALK_HVY: Walk to Transit
+#         WALK_COM: Walk to Transit
+#         DRIVE_LOC: Drive to Transit
+#         DRIVE_LRF: Drive to Transit
+#         DRIVE_EXP: Drive to Transit
+#         DRIVE_HVY: Drive to Transit
+#         DRIVE_COM: Drive to Transit
+#         WALK: Non-Motorized
+#         BIKE: Non-Motorized
+#         TAXI: Ride Hail
+#         TNC_SINGLE: Ride Hail
+#         TNC_SHARED: Ride Hail

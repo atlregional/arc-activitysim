@@ -1,0 +1,4 @@
+Description,Target,Expression
+### Distances
+,distance_tour,"tour_od_skims[('SOV_FREE_DISTANCE','MD')]"
+,distance_trip,trip_odt_skims['SOV_FREE_DISTANCE']
