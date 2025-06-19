@@ -288,5 +288,5 @@ Inc < 10000 (apply to only home zone),(is_income_less10K) * (Inc_PCTLT10K),,,,,,
 Inc 10k to 20k (apply to only home zone),(is_income_10K_20K) * (Inc_PCT10TO20),,,,,,,,,8,8,,,6,6,
 Inc 20k to 40k (apply to only home zone),(is_income_20K_40K) * (Inc_PCT20TO40),,,,,,,,,1,1,,,1,1,
 #,,,,,,,,,,,,,,,,
-# No KNR / PNR At Work Subtours
+# No KNR / PNR At Work Subtours,,,,,,,,,,,,,,,,
 No KNR / PNR At Work Subtours,is_atwork_subtour,,,,,,,,,,,-999,-999,-999,-999,
