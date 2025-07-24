@@ -52,6 +52,7 @@ EXPECTED_MODELS = [
     "track_skim_usage",
     "write_trip_matrices",
     "write_tables",
+    "summarize",
 ]
 
 
